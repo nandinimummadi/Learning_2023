@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+void swap(void* ptr1, void* ptr2, size_t size) {
+    unsigned char* charPtr1 = (unsigned char*)ptr1;
+    unsigned char* charPtr2 = (unsigned char*)ptr2;
+
+    while (size--) {
+        unsigned char temp = *charPtr1;
+        *charPtr1++ = *charPtr2;
+        *charPtr2++ = temp;
+    }
+}
+
+int main() {
+    int num1 = 10;
+    int num2 = 20;
+
+    printf("Before Swap:\n");
+    printf("num1 = %d\n", num1);
+    printf("num2 = %d\n", num2);
+
+    swap(&num1, &num2, sizeof(int));
+
+    printf("\nAfter Swap:\n");
+    printf("num1 = %d\n", num1);
+    printf("num2 = %d\n", num2);
+
+    return 0;
+}

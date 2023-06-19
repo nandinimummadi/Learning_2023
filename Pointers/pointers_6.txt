@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int compareBoxes(int boxA[], int boxB[], int size) {
+    int count[size]; // Array to keep track of item counts in boxA
+
+    // Initialize count array with zeros
+    int i;
+    for (i = 0; i < size; i++) {
+        count[i] = 0;
+    }
+
+    // Count the occurrences of items in boxA
+    for (i = 0; i < size; i++) {
+        int item = boxA[i];
+        int j;
+
+        for (j = 0; j < size; j++) {
+            if (boxB[j] == item && count[j] == 0) {
+                count[j] = 1;
+                break;
+            }
+        }
+
+        // Item not found in boxB or already mapped
+        if (j == size) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int main() {
+    int boxA[] = {200, 10, -90};
+    int boxB[] = {-90, 200, 10};
+    int size = sizeof(boxA) / sizeof(boxA[0]);
+
+    int result = compareBoxes(boxA, boxB, size);
+
+    if (result == 1) {
+        printf("Equal Boxes: True\n");
+    } else {
+        printf("Equal Boxes: False\n");
+    }
+
+    return 0;
+}
