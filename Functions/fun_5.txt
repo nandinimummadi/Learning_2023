@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+unsigned char setBit(unsigned char num, int pos) {
+    return num | (1 << pos);
+}
+
+unsigned char clearBit(unsigned char num, int pos) {
+    return num & ~(1 << pos);
+}
+
+unsigned char toggleBit(unsigned char num, int pos) {
+    return num ^ (1 << pos);
+}
+
+int main() {
+    unsigned char number = 0x38; 
+    int bitPosition = 3;         
+
+    printf("Original Number: 0x%02X\n", number);
+
+    unsigned char numberWithBitSet = setBit(number, bitPosition);
+    printf("Number with Bit Set: 0x%02X\n", numberWithBitSet);
+
+    unsigned char numberWithBitCleared = clearBit(number, bitPosition);
+    printf("Number with Bit Cleared: 0x%02X\n", numberWithBitCleared);
+
+    unsigned char numberWithBitToggled = toggleBit(number, bitPosition);
+    printf("Number with Bit Toggled: 0x%02X\n", numberWithBitToggled);
+
+    return 0;
+}

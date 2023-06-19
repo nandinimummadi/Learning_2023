@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+
+unsigned char decimalToBCD(unsigned char dec) {
+    return DEC_TO_BCD(dec);
+}
+
+unsigned char BCDToDecimal(unsigned char bcd) {
+    return BCD_TO_DEC(bcd);
+}
+
+int main() {
+    unsigned char decimalNumber = 35;  // Example decimal number
+
+    unsigned char bcdNumber = decimalToBCD(decimalNumber);
+    printf("Decimal Number: %d\n", decimalNumber);
+    printf("BCD Number: 0x%02X\n", bcdNumber);
+
+    unsigned char convertedDecimal = BCDToDecimal(bcdNumber);
+    printf("Converted Decimal Number: %d\n", convertedDecimal);
+
+    return 0;
+}
