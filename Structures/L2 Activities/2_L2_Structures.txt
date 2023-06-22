@@ -1,0 +1,39 @@
+2. Write a program to enter to Cartesian coordinate points and display the distance between them.
+
+#include <stdio.h>
+#include <math.h>
+
+// Structure definition for a point
+struct Point {
+    float x;
+    float y;
+};
+
+// Function to calculate the distance between two points
+float calculateDistance(const struct Point* p1, const struct Point* p2) {
+    float distance;
+
+    distance = sqrt(pow(p2->x - p1->x, 2) + pow(p2->y - p1->y, 2));
+
+    return distance;
+}
+
+int main() {
+    struct Point point1, point2;
+    float distance;
+
+    // Read the coordinates of point1
+    printf("Enter the coordinates of point 1 (x y): ");
+    scanf("%f %f", &point1.x, &point1.y);
+
+    // Read the coordinates of point2
+    printf("Enter the coordinates of point 2 (x y): ");
+    scanf("%f %f", &point2.x, &point2.y);
+
+    // Call the calculateDistance function
+    distance = calculateDistance(&point1, &point2);
+
+    printf("Distance between the points: %.2f\n", distance);
+
+    return 0;
+}

@@ -1,0 +1,51 @@
+1. Use structures to find the volume and the total surface area of the box. 
+   You need to access the members of the structure with the help of a structure pointer:
+    a. With the help of (*) asterisk or indirection operator and (.) dot operator.
+    b. With the help of ( -> ) Arrow operator using pointer as well as dot representation.
+
+#include <stdio.h>
+
+// Structure definition for a box
+struct Box {
+    double length;
+    double width;
+    double height;
+};
+
+// Function to calculate the volume of a box
+double calculateVolume(const struct Box* box) {
+    return box->length * box->width * box->height;
+}
+
+// Function to calculate the total surface area of a box
+double calculateSurfaceArea(const struct Box* box) {
+    return 2 * (box->length * box->width + box->length * box->height + box->width * box->height);
+}
+
+int main() {
+   
+    struct Box myBox;
+    myBox.length = 5.0;
+    myBox.width = 3.0;
+    myBox.height = 2.0;
+
+    
+    struct Box* boxPtr = &myBox;
+
+    
+    double volume1 = (*boxPtr).length * (*boxPtr).width * (*boxPtr).height;
+    double surfaceArea1 = 2 * ((*boxPtr).length * (*boxPtr).width + (*boxPtr).length * (*boxPtr).height + (*boxPtr).width * (*boxPtr).height);
+
+    
+    double volume2 = boxPtr->length * boxPtr->width * boxPtr->height;
+    double surfaceArea2 = 2 * (boxPtr->length * boxPtr->width + boxPtr->length * boxPtr->height + boxPtr->width * boxPtr->height);
+
+    printf("Volume (using (*) operator): %.2f\n", volume1);
+    printf("Surface Area (using (*) operator): %.2f\n", surfaceArea1);
+    printf("Volume (using (->) operator): %.2f\n", volume2);
+    printf("Surface Area (using (->) operator): %.2f\n", surfaceArea2);
+
+    return 0;
+}
+
+

@@ -1,0 +1,63 @@
+1. Data Parser:
+   A data logger transmits the data in ascii format as shown below
+   "S1-T:36.5-H:100-L:50"
+   Write a function to populate all the data in an array of structure. The output should be like
+   Sensor Info:
+   ---------------------
+   Sensor ID: S1
+   Temperature: 36.5 C
+   Humidity: 100
+   Light Intensity: 50%
+   ---------------------
+
+#include <stdio.h>
+#include <string.h>
+
+// Structure definition for sensor data
+struct SensorData {
+    char sensorID[10];
+    float temperature;
+    int humidity;
+    int lightIntensity;
+};
+
+// Function to parse the data and populate the structure array
+void parseData(const char* data, struct SensorData* sensorArray) {
+    char sensorID[10];
+    float temperature;
+    int humidity;
+    int lightIntensity;
+
+    // Parse the data using sscanf
+    sscanf(data, "%9[^-]-%*[^:]:%f-%*[^:]:%d-%*[^:]:%d", sensorID, &temperature, &humidity, &lightIntensity);
+
+    // Populate the structure array
+    strcpy(sensorArray->sensorID, sensorID);
+    sensorArray->temperature = temperature;
+    sensorArray->humidity = humidity;
+    sensorArray->lightIntensity = lightIntensity;
+}
+
+// Function to display the sensor information
+void displaySensorInfo(const struct SensorData* sensorArray) {
+    printf("Sensor Info:\n");
+    printf("---------------------\n");
+    printf("Sensor ID: %s\n", sensorArray->sensorID);
+    printf("Temperature: %.1f C\n", sensorArray->temperature);
+    printf("Humidity: %d\n", sensorArray->humidity);
+    printf("Light Intensity: %d%%\n", sensorArray->lightIntensity);
+    printf("---------------------\n");
+}
+
+int main() {
+    const char* data = "S1-T:36.5-H:100-L:50";
+    struct SensorData sensorArray;
+
+    // Parse the data and populate the structure array
+    parseData(data, &sensorArray);
+
+    // Display the sensor information
+    displaySensorInfo(&sensorArray);
+
+    return 0;
+}

@@ -1,0 +1,49 @@
+3. Write a program using structures to calculate the difference between two time periods using a user-defined function.
+
+#include <stdio.h>
+
+// Structure definition for time
+struct Time {
+    int hours;
+    int minutes;
+    int seconds;
+};
+
+// Function to calculate the difference between two time periods
+struct Time calculateTimeDifference(const struct Time* startTime, const struct Time* endTime) {
+    struct Time difference;
+    int totalSecondsStart, totalSecondsEnd, diffSeconds;
+
+    // Convert start time to total seconds
+    totalSecondsStart = startTime->hours * 3600 + startTime->minutes * 60 + startTime->seconds;
+
+    // Convert end time to total seconds
+    totalSecondsEnd = endTime->hours * 3600 + endTime->minutes * 60 + endTime->seconds;
+
+    // Calculate the difference in seconds
+    diffSeconds = totalSecondsEnd - totalSecondsStart;
+
+    // Convert the difference back to hours, minutes, and seconds
+    difference.hours = diffSeconds / 3600;
+    difference.minutes = (diffSeconds % 3600) / 60;
+    difference.seconds = (diffSeconds % 3600) % 60;
+
+    return difference;
+}
+
+int main() {
+    struct Time startTime, endTime, difference;
+
+    printf("Enter the start time (hours minutes seconds): ");
+    scanf("%d %d %d", &startTime.hours, &startTime.minutes, &startTime.seconds);
+
+    printf("Enter the end time (hours minutes seconds): ");
+    scanf("%d %d %d", &endTime.hours, &endTime.minutes, &endTime.seconds);
+
+    difference = calculateTimeDifference(&startTime, &endTime);
+
+    printf("\nTime difference: %d hours %d minutes %d seconds\n",
+           difference.hours, difference.minutes, difference.seconds);
+
+    return 0;
+}

@@ -1,0 +1,50 @@
+4. Write a program to pass a pointer to a structure as a parameter to a function and return back a pointer to structure 
+   to the calling function after modifying the members of structure.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure definition for a student
+struct Student {
+    char name[50];
+    int age;
+};
+
+// Function to modify the structure members using a pointer
+struct Student* modifyStudent(struct Student* student) {
+    printf("Enter new name: ");
+    scanf("%s", student->name);
+
+    printf("Enter new age: ");
+    scanf("%d", &(student->age));
+
+    return student;
+}
+
+int main() {
+    struct Student* student;
+    struct Student modifiedStudent;
+
+    // Allocate memory for the student structure
+    student = (struct Student*)malloc(sizeof(struct Student));
+
+    // Read initial data for the student
+    printf("Enter name: ");
+    scanf("%s", student->name);
+
+    printf("Enter age: ");
+    scanf("%d", &(student->age));
+
+    // Pass the pointer to the structure to the modifyStudent function
+    struct Student* returnedStudent = modifyStudent(student);
+
+    // Display the modified student details
+    printf("\nModified student details:\n");
+    printf("Name: %s\n", returnedStudent->name);
+    printf("Age: %d\n", returnedStudent->age);
+
+    // Free the dynamically allocated memory
+    free(student);
+
+    return 0;
+}
